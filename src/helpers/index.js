@@ -1,7 +1,5 @@
-export const randomSlideIndex = () => {
-    const slides = [0, 1, 2, 3, 4]
-    let unviewedSlides = [...slides]
-    if (unviewedSlides.length > 0) {
-        return Math.floor(Math.random() * unviewedSlides.length)
-    }
-}
+/**
+ * Returns a random integer between 0 (inclusive) and n (exclusive)
+ * @param {number} n - Maximum number
+ */
+export const randomInt = n => Math.floor(Math.random() * n)

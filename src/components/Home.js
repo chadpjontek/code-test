@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/Home.css'
+import { randomInt } from "../helpers";
 
 const Home = () => {
     const slides = [
@@ -24,30 +25,31 @@ const Home = () => {
             title: 'Vegan Says She Constantly Gets Mistaken for Woman in Her 20s Due to Plant-Based Diet'
         },
     ]
-    const [unviewedSlides, setUnviewedSlides] = useState(slides)
-    const [currentSlide, setCurrentSlide] = useState(Math.floor(Math.random() * 5))
+    const [unviewedSlides, setUnviewedSlides] = useState([0, 1, 2, 3, 4])
+    const [currentSlide, setCurrentSlide] = useState(randomInt(5))
 
     const nextSlide = () => {
-        const newArr = unviewedSlides.filter((e, i) => i !== currentSlide)
-        console.log(newArr)
+        // Filter the current slide out
+        const newArr = unviewedSlides.filter(e => e !== currentSlide)
         if (newArr.length > 0) {
-            const randNum = Math.floor(Math.random() * newArr.length);
             setUnviewedSlides(newArr)
-            setCurrentSlide(randNum)
+            // Choose a random new slide of those remaining
+            setCurrentSlide(newArr[randomInt(newArr.length)])
         } else {
-            const randNum = Math.floor(Math.random() * newArr.length);
-            setUnviewedSlides(slides);
-            setCurrentSlide(randNum)
+            // All slides viewed so reset them
+            setUnviewedSlides([0, 1, 2, 3, 4]);
+            // Choose a random new slide
+            setCurrentSlide(randomInt(5))
         }
     }
     return (
         <div>
             <div className="container">
-                <div className='hero-img' style={{ backgroundImage: 'url(' + unviewedSlides[currentSlide].url + ')' }}>
+                <div className='hero-img' style={{ backgroundImage: 'url(' + slides[currentSlide].url + ')' }}>
                     <div className='overlay'></div>
                     <div className='title-container'>
                         <h1>
-                            {unviewedSlides[currentSlide].title}
+                            {slides[currentSlide].title}
                         </h1>
                     </div>
 
