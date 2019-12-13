@@ -48,3 +48,10 @@ h1 {
     margin: 10px auto;
     display: block;
 }
+
+/*Media queries*/
+@media screen and (max-width: 1000px) {
+    h1 {
+        margin: 20px;
+    }
+}
